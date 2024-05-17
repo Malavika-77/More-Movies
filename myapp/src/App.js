@@ -13,13 +13,13 @@ function App() {
       if (!query) return;
       setError('');
       try {
-        const response = await axios.get(`http://localhost:5000/api/search?q=${query}`);
+        const response = await axios.get(`https://my-application-1rau.onrender.com/api/search?q=${query}`);
         if (response.data.Response === 'True') {
           const movieList = response.data.Search || [];
           // Fetch plot for each movie
           const moviesWithPlot = await Promise.all(
             movieList.map(async (movie) => {
-              const plotResponse = await axios.get(`http://localhost:5000/api/plot?imdbID=${movie.imdbID}`);
+              const plotResponse = await axios.get(`https://my-application-1rau.onrender.com/api/plot?imdbID=${movie.imdbID}`);
               return { ...movie, Plot: plotResponse.data.Plot };
             })
           );
